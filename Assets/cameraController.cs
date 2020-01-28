@@ -13,6 +13,7 @@ public class cameraController : MonoBehaviour
     GameObject drone;
     Vector3 prevDronePosition;
     Quaternion prevDroneRotation;
+    float distFromDrone = 5.0f;
 
     void Start()
     {
@@ -121,12 +122,21 @@ public class cameraController : MonoBehaviour
         }
     }
 
+    void locateCameraCloseToDrone()
+    {
+        //Vector3 shiftFromDrown = new Vector3(0,0,distFromDrone);
+        Vector3 shiftFromDrown = distFromDrone * transform.forward;
+        transform.position = drone.transform.position - shiftFromDrown;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown("t"))
         {
             trackingMode = !trackingMode;
+            if (trackingMode)
+                locateCameraCloseToDrone();
         }
         if (!trackingMode)
         {
