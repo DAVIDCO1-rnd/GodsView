@@ -28,34 +28,58 @@ public class cameraController : MonoBehaviour
         //Moving in positive X direction
         if (Input.GetKey("e"))
         {
-            transform.position += new Vector3(deltaPosition, 0, 0); 
+            transform.position += new Vector3(deltaPosition, 0, 0);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }
         }
         //Moving in negative X direction
         if (Input.GetKey("q"))
         {
-            transform.position += new Vector3(-deltaPosition, 0, 0); 
+            transform.position += new Vector3(-deltaPosition, 0, 0);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }
         }
 
         //Moving in positive Y direction
         if (Input.GetKey("d"))
         {
-            transform.position += new Vector3(0, deltaPosition, 0); 
+            transform.position += new Vector3(0, deltaPosition, 0);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }            
         }
         //Moving in negative Y direction
         if (Input.GetKey("a"))
         {
-            transform.position += new Vector3(0, -deltaPosition, 0); 
+            transform.position += new Vector3(0, -deltaPosition, 0);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }            
         }
 
         //Moving in positive Z direction
         if (Input.GetKey("c"))
         {
-            transform.position += new Vector3(0, 0, deltaPosition); 
+            transform.position += new Vector3(0, 0, deltaPosition);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }            
         }
         //Moving in negative Z direction
         if (Input.GetKey("z"))
         {
-            transform.position += new Vector3(0, 0, -deltaPosition); 
+            transform.position += new Vector3(0, 0, -deltaPosition);
+            if (trackingMode)
+            {
+                transform.LookAt(drone.transform);
+            }            
         } 
     }
 
@@ -138,11 +162,8 @@ public class cameraController : MonoBehaviour
             if (trackingMode)
                 locateCameraCloseToDrone();
         }
-        if (!trackingMode)
-        {
-            moveCamera();
-            rotateCamera();            
-        }
+        moveCamera();
+        rotateCamera();       
     }    
 
     void LateUpdate()
