@@ -88,36 +88,73 @@ public class cameraController : MonoBehaviour
         //Rotating about X axis in positive angle
         if (Input.GetKey("p"))
         {
-            transform.Rotate(deltaAngle, 0, 0, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, transform.right, deltaAngle);
+            }
+            else{
+                transform.Rotate(deltaAngle, 0, 0, Space.Self);
+            }            
         }
         //Rotating about X axis in negative angle
         if (Input.GetKey("i"))
         {
-            transform.Rotate(-deltaAngle, 0, 0, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, -transform.right, deltaAngle);
+            }
+            else{
+                transform.Rotate(-deltaAngle, 0, 0, Space.Self);
+            }            
+            
         }       
 
         //Rotating about Y axis in positive angle
         if (Input.GetKey("l"))
         {
-            transform.Rotate(0, deltaAngle, 0, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, transform.up, deltaAngle);
+            }
+            else{
+                transform.Rotate(0, deltaAngle, 0, Space.Self);
+            }            
         }
         //Rotating about Y axis in negative angle
         if (Input.GetKey("j"))
         {
-            transform.Rotate(0, -deltaAngle, 0, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, -transform.up, deltaAngle);
+            }
+            else{
+                transform.Rotate(0, -deltaAngle, 0, Space.Self);
+            }            
         }
 
         //Rotating about Z axis in positive angle 
         if (Input.GetKey("m"))
         {
-            transform.Rotate(0, 0, deltaAngle, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, transform.forward, deltaAngle);
+            }
+            else{
+                transform.Rotate(0, 0, deltaAngle, Space.Self);
+            }            
         }        
 
 
         //Rotating about Z axis in negative angle 
         if (Input.GetKey("b"))
         {
-            transform.Rotate(0, 0, -deltaAngle, Space.Self);
+            if (trackingMode)
+            {
+                transform.RotateAround(drone.transform.position, -transform.forward, deltaAngle);
+            }
+            else{
+                transform.Rotate(0, 0, -deltaAngle, Space.Self);
+            }            
         }
     }
 
