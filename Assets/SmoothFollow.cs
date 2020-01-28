@@ -19,6 +19,15 @@ public class SmoothFollow : MonoBehaviour
         prevQuadCopterRotation = quadCopter.rotation;
     }
 
+    void myLookAt(Transform target)
+    {
+        //I'm using myLookAt instead of transform.LookAt in order to prevent flipping the camera upside down.
+        //When using transform.LookAt, if I am in tracking mode and I'm rotating a camera 180 degrees around the 'drone' (elavation), and then I move the camera somewhere, then the transform.LookAt flips the camera back in 180 degrees (I guess it's not the user's intention).
+        var relativeUp = target.TransformDirection (Vector3.forward);
+        var relativePos = target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(relativePos,relativeUp);
+    }
+
     void moveCamera()
     {
         //Moving in positive X direction
@@ -27,7 +36,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }
         }
         //Moving in negative X direction
@@ -36,7 +45,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(-deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }
         }
 
@@ -46,7 +55,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(0, deltaPosition * Time.deltaTime, 0);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }            
         }
         //Moving in negative Y direction
@@ -55,7 +64,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(0, -deltaPosition * Time.deltaTime, 0);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }            
         }
 
@@ -65,7 +74,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(0, 0, deltaPosition * Time.deltaTime);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }            
         }
         //Moving in negative Z direction
@@ -74,7 +83,7 @@ public class SmoothFollow : MonoBehaviour
             transform.position += new Vector3(0, 0, -deltaPosition * Time.deltaTime);
             if (trackingMode)
             {
-                transform.LookAt(quadCopter);
+                myLookAt(quadCopter);
             }            
         } 
     }
