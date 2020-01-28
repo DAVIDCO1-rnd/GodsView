@@ -7,7 +7,7 @@ public class cubeController : MonoBehaviour
     float deltaPosition = 0.3f;
     float deltaAngle = 1.0f;
 
-    void moveCamera()
+    void moveCube()
     {
         //Moving in positive X direction
         if (Input.GetKey("r"))
@@ -43,7 +43,7 @@ public class cubeController : MonoBehaviour
         } 
     }
 
-    void rotateCamera()
+    void rotateCube()
     {
         //Rotating about X axis in positive angle
         if (Input.GetKey("o"))
@@ -82,7 +82,7 @@ public class cubeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveCamera();
-        rotateCamera();
+        moveCube();
+        rotateCube();
     }
 }
