@@ -10,17 +10,17 @@ public class cameraController : MonoBehaviour
     float eps = 0.000001f;
     // Start is called before the first frame update
     bool trackingMode;
-    GameObject drone;
-    Vector3 prevDronePosition;
-    Quaternion prevDroneRotation;
-    float distFromDrone = 5.0f;
+    GameObject quadCopter;
+    Vector3 prevQuadCopterPosition;
+    Quaternion prevQuadCopterRotation;
+    float distFromQuadCopter = 5.0f;
 
     void Start()
     {
-        drone = GameObject.FindWithTag("drone");
+        quadCopter = GameObject.Find("QuadCopter");
         trackingMode = false;
-        prevDronePosition = drone.transform.position;
-        prevDroneRotation = drone.transform.rotation;
+        prevQuadCopterPosition = quadCopter.transform.position;
+        prevQuadCopterRotation = quadCopter.transform.rotation;
     }
 
     void moveCamera()
@@ -31,7 +31,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(deltaPosition, 0, 0);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }
         }
         //Moving in negative X direction
@@ -40,7 +40,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(-deltaPosition, 0, 0);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }
         }
 
@@ -50,7 +50,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(0, deltaPosition, 0);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }            
         }
         //Moving in negative Y direction
@@ -59,7 +59,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(0, -deltaPosition, 0);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }            
         }
 
@@ -69,7 +69,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(0, 0, deltaPosition);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }            
         }
         //Moving in negative Z direction
@@ -78,7 +78,7 @@ public class cameraController : MonoBehaviour
             transform.position += new Vector3(0, 0, -deltaPosition);
             if (trackingMode)
             {
-                transform.LookAt(drone.transform);
+                transform.LookAt(quadCopter.transform);
             }            
         } 
     }
@@ -90,7 +90,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, transform.right, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, transform.right, deltaAngle);
             }
             else{
                 transform.Rotate(deltaAngle, 0, 0, Space.Self);
@@ -101,7 +101,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, -transform.right, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, -transform.right, deltaAngle);
             }
             else{
                 transform.Rotate(-deltaAngle, 0, 0, Space.Self);
@@ -114,7 +114,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, transform.up, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, transform.up, deltaAngle);
             }
             else{
                 transform.Rotate(0, deltaAngle, 0, Space.Self);
@@ -125,7 +125,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, -transform.up, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, -transform.up, deltaAngle);
             }
             else{
                 transform.Rotate(0, -deltaAngle, 0, Space.Self);
@@ -137,7 +137,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, transform.forward, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, transform.forward, deltaAngle);
             }
             else{
                 transform.Rotate(0, 0, deltaAngle, Space.Self);
@@ -150,7 +150,7 @@ public class cameraController : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(drone.transform.position, -transform.forward, deltaAngle);
+                transform.RotateAround(quadCopter.transform.position, -transform.forward, deltaAngle);
             }
             else{
                 transform.Rotate(0, 0, -deltaAngle, Space.Self);
@@ -158,36 +158,36 @@ public class cameraController : MonoBehaviour
         }
     }
 
-    void trackRotatingDrone()
+    void trackRotatingQuadCopter()
     {
-        Quaternion diffRotation = drone.transform.rotation * Quaternion.Inverse(prevDroneRotation);
-        prevDroneRotation = drone.transform.rotation;
+        Quaternion diffRotation = quadCopter.transform.rotation * Quaternion.Inverse(prevQuadCopterRotation);
+        prevQuadCopterRotation = quadCopter.transform.rotation;
         float angle = 0.0f;
         Vector3 axis = Vector3.zero;
         diffRotation.ToAngleAxis(out angle, out axis);         
         if (trackingMode && angle > eps)
         {
-            transform.RotateAround(drone.transform.position, axis, angle);                       
+            transform.RotateAround(quadCopter.transform.position, axis, angle);                       
         }
     }
 
-    void trackMovingDrone()
+    void trackMovingQuadCopter()
     {
-        Vector3 t1 = prevDronePosition - transform.position;
-        Vector3 t2 = drone.transform.position - transform.position;
+        Vector3 t1 = prevQuadCopterPosition - transform.position;
+        Vector3 t2 = quadCopter.transform.position - transform.position;
         Vector3 movement = t2 - t1;
-        prevDronePosition = drone.transform.position;
+        prevQuadCopterPosition = quadCopter.transform.position;
         if (trackingMode && movement.magnitude > eps)
         {
             transform.position += movement;                       
         }
     }
 
-    void locateCameraCloseToDrone()
+    void locateCameraCloseToQuadCopter()
     {
-        //Vector3 shiftFromDrown = new Vector3(0,0,distFromDrone);
-        Vector3 shiftFromDrown = distFromDrone * transform.forward;
-        transform.position = drone.transform.position - shiftFromDrown;
+        //Vector3 shiftFromDrown = new Vector3(0,0,distFromQuadCopter);
+        Vector3 shiftFromDrown = distFromQuadCopter * transform.forward;
+        transform.position = quadCopter.transform.position - shiftFromDrown;
     }
 
     // Update is called once per frame
@@ -197,7 +197,7 @@ public class cameraController : MonoBehaviour
         {
             trackingMode = !trackingMode;
             if (trackingMode)
-                locateCameraCloseToDrone();
+                locateCameraCloseToQuadCopter();
         }
         moveCamera();
         rotateCamera();       
@@ -205,7 +205,8 @@ public class cameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        trackRotatingDrone();    
-        trackMovingDrone();
+        //We reach here after the quadCopter's 'Update' function (in which its position might have changed)
+        trackRotatingQuadCopter();    
+        trackMovingQuadCopter();
     }
 }
