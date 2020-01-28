@@ -4,8 +4,8 @@
 public class SmoothFollow : MonoBehaviour
 {
     public Transform quadCopter;
-    float deltaPosition = 0.1f;
-    float deltaAngle = 2.0f;
+    float deltaPosition = 3.0f;
+    float deltaAngle = 30.0f;
 
     float eps = 0.000001f;
     bool trackingMode = false;
@@ -24,7 +24,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in positive X direction
         if (Input.GetKey("e"))
         {
-            transform.position += new Vector3(deltaPosition, 0, 0);
+            transform.position += new Vector3(deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -33,7 +33,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in negative X direction
         if (Input.GetKey("q"))
         {
-            transform.position += new Vector3(-deltaPosition, 0, 0);
+            transform.position += new Vector3(-deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -43,7 +43,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in positive Y direction
         if (Input.GetKey("d"))
         {
-            transform.position += new Vector3(0, deltaPosition, 0);
+            transform.position += new Vector3(0, deltaPosition * Time.deltaTime, 0);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -52,7 +52,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in negative Y direction
         if (Input.GetKey("a"))
         {
-            transform.position += new Vector3(0, -deltaPosition, 0);
+            transform.position += new Vector3(0, -deltaPosition * Time.deltaTime, 0);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -62,7 +62,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in positive Z direction
         if (Input.GetKey("c"))
         {
-            transform.position += new Vector3(0, 0, deltaPosition);
+            transform.position += new Vector3(0, 0, deltaPosition * Time.deltaTime);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -71,7 +71,7 @@ public class SmoothFollow : MonoBehaviour
         //Moving in negative Z direction
         if (Input.GetKey("z"))
         {
-            transform.position += new Vector3(0, 0, -deltaPosition);
+            transform.position += new Vector3(0, 0, -deltaPosition * Time.deltaTime);
             if (trackingMode)
             {
                 transform.LookAt(quadCopter);
@@ -86,10 +86,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, transform.right, deltaAngle);
+                transform.RotateAround(quadCopter.position, transform.right, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(deltaAngle, 0, 0, Space.Self);
+                transform.Rotate(deltaAngle * Time.deltaTime, 0, 0, Space.Self);
             }            
         }
         //Rotating about X axis in negative angle
@@ -97,10 +97,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, -transform.right, deltaAngle);
+                transform.RotateAround(quadCopter.position, -transform.right, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(-deltaAngle, 0, 0, Space.Self);
+                transform.Rotate(-deltaAngle * Time.deltaTime, 0, 0, Space.Self);
             }            
             
         }       
@@ -110,10 +110,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, transform.up, deltaAngle);
+                transform.RotateAround(quadCopter.position, transform.up, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(0, deltaAngle, 0, Space.Self);
+                transform.Rotate(0, deltaAngle * Time.deltaTime, 0, Space.Self);
             }            
         }
         //Rotating about Y axis in negative angle
@@ -121,10 +121,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, -transform.up, deltaAngle);
+                transform.RotateAround(quadCopter.position, -transform.up, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(0, -deltaAngle, 0, Space.Self);
+                transform.Rotate(0, -deltaAngle * Time.deltaTime, 0, Space.Self);
             }            
         }
 
@@ -133,10 +133,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, transform.forward, deltaAngle);
+                transform.RotateAround(quadCopter.position, transform.forward, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(0, 0, deltaAngle, Space.Self);
+                transform.Rotate(0, 0, deltaAngle * Time.deltaTime, Space.Self);
             }            
         }        
 
@@ -146,10 +146,10 @@ public class SmoothFollow : MonoBehaviour
         {
             if (trackingMode)
             {
-                transform.RotateAround(quadCopter.position, -transform.forward, deltaAngle);
+                transform.RotateAround(quadCopter.position, -transform.forward, deltaAngle * Time.deltaTime);
             }
             else{
-                transform.Rotate(0, 0, -deltaAngle, Space.Self);
+                transform.Rotate(0, 0, -deltaAngle * Time.deltaTime, Space.Self);
             }            
         }
     }
