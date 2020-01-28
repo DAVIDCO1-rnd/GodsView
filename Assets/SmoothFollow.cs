@@ -8,15 +8,13 @@ public class SmoothFollow : MonoBehaviour
     float deltaAngle = 2.0f;
 
     float eps = 0.000001f;
-    bool trackingMode;
+    bool trackingMode = false;
     Vector3 prevQuadCopterPosition;
     Quaternion prevQuadCopterRotation;
     float distFromQuadCopter = 2.0f;
 
     void Start()
-    {
-        //quadCopter = GameObject.Find("QuadCopter");
-        trackingMode = false;
+    {                
         prevQuadCopterPosition = quadCopter.position;
         prevQuadCopterRotation = quadCopter.rotation;
     }
