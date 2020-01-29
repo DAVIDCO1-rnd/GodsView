@@ -31,7 +31,7 @@ public class SmoothFollow : MonoBehaviour
     void moveCamera()
     {
         //Moving in positive X direction
-        if (Input.GetKey("e"))
+        if (Input.GetKey("l"))
         {
             transform.position += new Vector3(deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
@@ -40,7 +40,7 @@ public class SmoothFollow : MonoBehaviour
             }
         }
         //Moving in negative X direction
-        if (Input.GetKey("q"))
+        if (Input.GetKey("j"))
         {
             transform.position += new Vector3(-deltaPosition * Time.deltaTime, 0, 0);
             if (trackingMode)
@@ -49,27 +49,27 @@ public class SmoothFollow : MonoBehaviour
             }
         }
 
-        //Moving in positive Y direction
-        if (Input.GetKey("d"))
-        {
-            transform.position += new Vector3(0, deltaPosition * Time.deltaTime, 0);
-            if (trackingMode)
-            {
-                myLookAt(quadCopter);
-            }            
-        }
-        //Moving in negative Y direction
-        if (Input.GetKey("a"))
-        {
-            transform.position += new Vector3(0, -deltaPosition * Time.deltaTime, 0);
-            if (trackingMode)
-            {
-                myLookAt(quadCopter);
-            }            
-        }
+        // //Moving in positive Y direction
+        // if (Input.GetKey("d"))
+        // {
+        //     transform.position += new Vector3(0, deltaPosition * Time.deltaTime, 0);
+        //     if (trackingMode)
+        //     {
+        //         myLookAt(quadCopter);
+        //     }            
+        // }
+        // //Moving in negative Y direction
+        // if (Input.GetKey("a"))
+        // {
+        //     transform.position += new Vector3(0, -deltaPosition * Time.deltaTime, 0);
+        //     if (trackingMode)
+        //     {
+        //         myLookAt(quadCopter);
+        //     }            
+        // }
 
         //Moving in positive Z direction
-        if (Input.GetKey("c"))
+        if (Input.GetKey("i"))
         {
             transform.position += new Vector3(0, 0, deltaPosition * Time.deltaTime);
             if (trackingMode)
@@ -78,7 +78,7 @@ public class SmoothFollow : MonoBehaviour
             }            
         }
         //Moving in negative Z direction
-        if (Input.GetKey("z"))
+        if (Input.GetKey("m"))
         {
             transform.position += new Vector3(0, 0, -deltaPosition * Time.deltaTime);
             if (trackingMode)
@@ -91,7 +91,7 @@ public class SmoothFollow : MonoBehaviour
     void rotateCamera()
     {
         //Rotating about X axis in positive angle
-        if (Input.GetKey("p"))
+        if (Input.GetKey("w"))
         {
             if (trackingMode)
             {
@@ -102,7 +102,7 @@ public class SmoothFollow : MonoBehaviour
             }            
         }
         //Rotating about X axis in negative angle
-        if (Input.GetKey("i"))
+        if (Input.GetKey("s"))
         {
             if (trackingMode)
             {
@@ -115,7 +115,7 @@ public class SmoothFollow : MonoBehaviour
         }       
 
         //Rotating about Y axis in positive angle
-        if (Input.GetKey("l"))
+        if (Input.GetKey("d"))
         {
             if (trackingMode)
             {
@@ -126,7 +126,7 @@ public class SmoothFollow : MonoBehaviour
             }            
         }
         //Rotating about Y axis in negative angle
-        if (Input.GetKey("j"))
+        if (Input.GetKey("a"))
         {
             if (trackingMode)
             {
@@ -138,7 +138,7 @@ public class SmoothFollow : MonoBehaviour
         }
 
         //Rotating about Z axis in positive angle 
-        if (Input.GetKey("m"))
+        if (Input.GetKey("x"))
         {
             if (trackingMode)
             {
@@ -151,7 +151,7 @@ public class SmoothFollow : MonoBehaviour
 
 
         //Rotating about Z axis in negative angle 
-        if (Input.GetKey("b"))
+        if (Input.GetKey("z"))
         {
             if (trackingMode)
             {
