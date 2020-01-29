@@ -178,8 +178,7 @@ public class SmoothFollow : MonoBehaviour
                 locateCameraCloseToQuadCopter();
         }
         moveCamera();
-        rotateCamera();
-              
+        rotateCamera();              
     }    
 
     void LateUpdate()
