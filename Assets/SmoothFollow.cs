@@ -3,6 +3,23 @@
 [ExecuteAlways]
 public class SmoothFollow : MonoBehaviour
 {
+    /*
+    Added the functionality for moving and rotating the main camera.
+    There are two possible modes: tracking mode and non-tracking mode.
+    In non-tracking mode you can move and rotate the camera however you want.
+    In tracking mode, every time you move or rotate the camera, the camera will always look at the drone. also, in tracking mode, you can only move the camera towards or backwards the drone.
+    For switching between tracking mode and non-tracking mode (or vise versa) press the 't' button (the default is non-tracking mode).
+    All the following keyboards are used to move and rotate the camera in CAMERA SPACE ONLY! Meaning that in every key-press for camera rotation, the camera will rotate around one of the 3 axises X,Y,Z in its space (in non-tracking mode the axis passes through the camera and in tracking mode the axis passes through the drone).
+    The following keyboards are used for controlling the camera:
+    Keyboard 't': Switching between tracking mode and non-tracking mode.
+    Keyboard 'l': Moving in positive X direction (in camera space) - moving right in camera space (this option is NOT available in tracking mode).
+    Keyboard 'j': Moving in negative X direction (in camera space) - moving left in camera space (this option is NOT available in tracking mode).
+    Keyboard 'i': Moving in positive Z direction (in camera space) - moving forward in camera space. Can be used also in tracking mode but it won't let you pass through the drone in tracking mode since you won't track it anymore in this case.
+    Keyboard 'k': Moving in negative Z direction (in camera space) - moving backward in camera space. Can be used also in tracking mode but it won't let you move the camera too far from the drone in tracking mode since the camera might be too far to see (track).
+
+    */
+    
+
     public Transform quadCopter;
     float deltaPosition = 3.0f;
     float deltaAngle = 30.0f;
@@ -178,8 +195,7 @@ public class SmoothFollow : MonoBehaviour
                 locateCameraCloseToQuadCopter();
         }
         moveCamera();
-        rotateCamera(); 
-                     
+        rotateCamera();       
     }    
 
     void LateUpdate()
